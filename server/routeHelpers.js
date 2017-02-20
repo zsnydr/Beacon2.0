@@ -39,7 +39,6 @@ module.exports = {
 
   // create a new ticket instance and add it to the tickets table
   addToQueue: (req, res) => {
-    console.log('req.session', req.session)
     return dbHelpers.addToQueue(req.body, req.session)
     .then((tickets) => {
       res.json(tickets);

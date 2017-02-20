@@ -20,12 +20,6 @@ const Ticket = db.define('ticket', {
   },
   message: Sequelize.TEXT,
   location: Sequelize.STRING,
-  // pulsing dot coordinates
-  x: Sequelize.INTEGER,
-  y: Sequelize.INTEGER,
-  // dot color
-  color: Sequelize.STRING,
-
   claimed: {
     type: Sequelize.BOOLEAN,
     defaultValue: false
@@ -62,13 +56,12 @@ Ticket.hasOne(Claim);
 Claim.belongsTo(Ticket);
 
 // Create Tables
-db
-  .sync({ force: false })
+db.sync({ force: false })
   .then(() => {
     console.log('Postgres tables synced');
   })
   .catch((err) => {
-    console.log(`Error syncing tables: ${err}`);
+    console.log(`Error syncing Postgres tables: ${err}`);
   });
 
 module.exports = {

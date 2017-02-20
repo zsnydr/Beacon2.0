@@ -2,7 +2,7 @@ const passport = require('passport');
 const routeHelpers = require('./routeHelpers');
 
 module.exports = (app) => {
-  app.get('/auth/github', passport.authenticate('github', { scope: ['user:email'] }), (req, res) => {
+  app.get('/auth/github', passport.authenticate('github', { scope: ['user:email'] }), () => {
     // The request will be redirected to GitHub for authentication, so this
     // function will not be called.
   });
