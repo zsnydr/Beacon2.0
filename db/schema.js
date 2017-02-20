@@ -1,21 +1,7 @@
-var pg = require('pg')
-var Sequelize = require('sequelize');
-var db = new Sequelize(process.env.DATABASE_URL || 'postgres://localhost/beacon', {
-  dialect: 'postgres'
-});
+const Sequelize = require('sequelize');
+const db = require('./config');
 
-//Establishes the connection to the database
-db
-  .authenticate()
-  .then(function (err) {
-    console.log('Connection established');
-  })
-  .catch(function (err) {
-    console.log('Unable to connect: ', err);
-  });
-
-//Creates table of users
-var User = db.define('user', {
+const User = db.define('user', {
   id: {
     type: Sequelize.INTEGER,
     primaryKey: true,
@@ -26,7 +12,7 @@ var User = db.define('user', {
 });
 
 //Creates table of tickets
-var Ticket = db.define('ticket', {
+const Ticket = db.define('ticket', {
   id: {
     type: Sequelize.INTEGER,
     primaryKey: true,
@@ -55,7 +41,7 @@ var Ticket = db.define('ticket', {
 });
 
 //creates table of claimed tickets
-var Claim = db.define('claim', {
+const Claim = db.define('claim', {
   id: {
     type: Sequelize.INTEGER,
     primaryKey: true,
@@ -75,15 +61,18 @@ Claim.belongsTo(User);
 Ticket.hasOne(Claim);
 Claim.belongsTo(Ticket);
 
-//Create Tables
+// Create Tables
 db
-  .sync({force: true})
-  .then(function() {
-    console.log('Tables created');
- });
+  .sync({ force: false })
+  .then(() => {
+    console.log('Postgres tables synced');
+  })
+  .catch((err) => {
+    console.log(`Error syncing tables: ${err}`);
+  });
 
 module.exports = {
-  User: User,
-  Ticket: Ticket,
-  Claim: Claim
+  User,
+  Ticket,
+  Claim
 };

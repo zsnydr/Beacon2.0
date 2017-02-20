@@ -1,0 +1,30 @@
+{
+  "extends": "airbnb",
+  "parser": "babel-eslint",
+  "env": {
+    "browser": true,
+    "node": true,
+    "es6": true,
+    "mocha": true
+  },
+  "rules": {
+    "valid-jsdoc": ["error", {
+      "requireReturn": true,
+      "requireReturnType": true,
+      "requireParamDescription": true,
+      "requireReturnDescription": true
+    }],
+    "func-names": ["error", "never"],                       # added this line
+    "arrow-body-style": ["error", "always"],                # added this line
+    "comma-dangle": ["error", "never"],                     # added this line
+    "no-console": 0,                                        # added this line
+    "react/forbid-prop-types": [0, { "forbid": ["any"] }],  # added this line
+    "require-jsdoc": ["error", {
+      "require": {
+        "FunctionDeclaration": false,
+        "MethodDefinition": false,
+        "ClassDeclaration": false
+        }
+    }]
+  }
+}

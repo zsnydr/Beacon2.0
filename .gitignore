@@ -3,7 +3,6 @@
 
 ## NPM ##
 node_modules/
-Client/components/bower_components/
 
 ## config files ##
-config.js
+server/config.js
