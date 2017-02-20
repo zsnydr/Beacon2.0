@@ -3,6 +3,7 @@
 
 ## NPM ##
 node_modules/
+client/node_modules/
 
 ## config files ##
 server/config.js
