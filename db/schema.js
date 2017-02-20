@@ -7,11 +7,11 @@ const User = db.define('user', {
     primaryKey: true,
     autoIncrement: true
   },
-  username: Sequelize.STRING, //GitHub username
-  displayname: Sequelize.STRING //full first and last name
+  username: Sequelize.STRING, // GitHub username
+  displayname: Sequelize.STRING // full first and last name
 });
 
-//Creates table of tickets
+// Creates table of tickets
 const Ticket = db.define('ticket', {
   id: {
     type: Sequelize.INTEGER,
@@ -20,10 +20,10 @@ const Ticket = db.define('ticket', {
   },
   message: Sequelize.TEXT,
   location: Sequelize.STRING,
-  //pulsing dot coordinates
+  // pulsing dot coordinates
   x: Sequelize.INTEGER,
   y: Sequelize.INTEGER,
-  //dot color
+  // dot color
   color: Sequelize.STRING,
 
   claimed: {
@@ -40,18 +40,18 @@ const Ticket = db.define('ticket', {
   }
 });
 
-//creates table of claimed tickets
+// creates table of claimed tickets
 const Claim = db.define('claim', {
   id: {
     type: Sequelize.INTEGER,
     primaryKey: true,
     autoIncrement: true
   },
-  //id of the user who claimed the ticket
+  // id of the user who claimed the ticket
   helpeeId: Sequelize.INTEGER
 });
 
-//Defines relationships between tables
+// Defines relationships between tables
 User.hasMany(Ticket);
 Ticket.belongsTo(User);
 

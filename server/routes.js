@@ -10,7 +10,7 @@ module.exports = (app) => {
   app.get('/callback', passport.authenticate('github', { failureRedirect: '/session' }), routeHelpers.newUser, (req, res) => {
     // upon Github authentication, add the passport object to the current cookie
     // and redirect to tickets page
-    req.session.cookie.passport = req.session.passport;
+    // req.session.cookie.passport = req.session.passport;
     res.redirect('/#!/tickets');
   });
 
@@ -26,5 +26,5 @@ module.exports = (app) => {
 
   app.put('/unsolved', routeHelpers.isLoggedIn, routeHelpers.tagUnSolved);
 
-  app.get('/signout', routeHelpers.isLoggedIn, routeHelpers.terminateSession)
+  app.get('/signout', routeHelpers.isLoggedIn, routeHelpers.terminateSession);
 };

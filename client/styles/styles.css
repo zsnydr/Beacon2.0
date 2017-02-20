@@ -1,6 +1,6 @@
 body {
 	font-family: "Inconsolata", "Times New Roman", serif;
-	background-color: #2d2d2d;
+	background-color: #E9EAEE;
 }
 
 #welcome, #support {
@@ -29,7 +29,7 @@ body {
 }
 
 .list-group {
-	height: 575px;
+	/*height: 575px;*/
 	overflow: auto;
 }
 

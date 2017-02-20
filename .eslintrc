@@ -14,11 +14,12 @@
       "requireParamDescription": true,
       "requireReturnDescription": true
     }],
-    "func-names": ["error", "never"],                       # added this line
-    "arrow-body-style": ["error", "always"],                # added this line
-    "comma-dangle": ["error", "never"],                     # added this line
-    "no-console": 0,                                        # added this line
-    "react/forbid-prop-types": [0, { "forbid": ["any"] }],  # added this line
+    "space-before-function-paren": ["error", "never"],
+    "no-param-reassign": ["error", { "props": false }],
+    "func-names": ["error", "never"],
+    "arrow-body-style": ["error", "always"],
+    "comma-dangle": ["error", "never"],
+    "no-console": 0,
     "require-jsdoc": ["error", {
       "require": {
         "FunctionDeclaration": false,

@@ -28,14 +28,11 @@ module.exports = {
       y,
       color,
       userId: userID
-    })
-    .then((ticket) => {
-      return Ticket.findAll();
     });
   },
 
   tagClaimed: ({ id, userId }, { userID }) => {
-    Ticket.find({ where: { id } })
+    return Ticket.find({ where: { id } })
     .then((ticket) => {
       ticket.update({ claimed: true });
     })
@@ -49,7 +46,7 @@ module.exports = {
   },
 
   eraseClaim: ({ id, ticketId }) => {
-    Claim.destroy({ where: { id } })
+    return Claim.destroy({ where: { id } })
     .then(() => {
       Ticket.find({ where: { id: ticketId } });
     })
@@ -59,14 +56,14 @@ module.exports = {
   },
 
   tagSolved: (id) => {
-    Ticket.find({ where: { id } })
+    return Ticket.find({ where: { id } })
     .then((ticket) => {
       ticket.update({ solved: true });
     });
   },
 
   tagUnSolved: (id) => {
-    Ticket.find({ where: { id } })
+    return Ticket.find({ where: { id } })
     .then((ticket) => {
       ticket.update({ preSolved: false, claimed: false });
     });

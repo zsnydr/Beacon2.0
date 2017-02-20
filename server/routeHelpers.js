@@ -1,23 +1,4 @@
-// const pg = require('pg');
-// const Sequelize = require('sequelize');
 const dbHelpers = require('./dbHelpers');
-
-// postgres models
-
-// establish database connection for querying
-// var db = new Sequelize(process.env.DATABASE_URL || 'postgres://localhost/beacon', {
-//   dialect: 'postgres'
-// });
-
-// db
-//  .authenticate()
-//  .then(function(err) {
-//    console.log('Connection established');
-//  })
-//  .catch(function(err) {
-//    console.log('Unable to connect: ', err);
-//  });
-
 
 module.exports = {
   // if the current user does not exist in the users table, create a new record,
@@ -35,17 +16,17 @@ module.exports = {
 
   // middleware that validates the user is currently logged in by analyzing the session
   isLoggedIn: (req, res, next) => {
-    if(req.session && req.session.passport && req.session.passport.user.username && req.session.passport.user.provider === 'github') {
+    if (req.session && req.session.passport && req.session.passport.user.username && req.session.passport.user.provider === 'github') {
       next();
     } else {
-      console.log('failed on server');
+      console.log('Failed loggedIn middleware');
       res.end('failed');
     }
   },
 
   terminateSession: (req, res) => {
     req.session.destroy();
-    res.redirect('/#/signin');
+    res.redirect('/#!/signin');
   },
 
   // query for all tickets and claims that exist in DB and send to client
@@ -58,6 +39,7 @@ module.exports = {
 
   // create a new ticket instance and add it to the tickets table
   addToQueue: (req, res) => {
+    console.log('req.session', req.session)
     return dbHelpers.addToQueue(req.body, req.session)
     .then((tickets) => {
       res.json(tickets);

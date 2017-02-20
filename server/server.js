@@ -4,7 +4,7 @@ const path = require('path');
 const session = require('express-session');
 const passport = require('passport');
 const GitHubStrategy = require('passport-github2').Strategy;
-const routes = require('./routes');
+const router = require('./routes');
 const config = require('./config');
 const db = require('../db/config');
 
@@ -13,6 +13,7 @@ const db = require('../db/config');
 // const webpackDevMiddleware = require('webpack-dev-middleware');
 
 const app = express();
+const expressRouter = express.Router();
 // const compiler = webpack(webpackConfig);
 
 passport.serializeUser((id, done) => {
@@ -24,6 +25,7 @@ passport.deserializeUser((user, done) => {
 });
 
 // set configuration keys for Github authentication via Passport
+
 passport.use(new GitHubStrategy(
   {
     clientID: process.env.GITHUB_CLIENT_ID || config.keys.gitHubClientId,
@@ -52,12 +54,12 @@ app.use(express.static(path.join(__dirname, '../client')));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-routes(app);
+app.use('/api', expressRouter);
+router(expressRouter);
 
 app.set('port', process.env.PORT || 3000);
 
-db
-  .authenticate()
+db.authenticate()
   .then(() => {
     console.log('Postgres connection established');
     app.listen(app.get('port'), () => {
